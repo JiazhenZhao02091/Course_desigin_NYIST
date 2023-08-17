@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(../img/background.png);
+  background-position: center;
+  background-size: cover;
+}
+
+.form{
+  position: relative;
+  padding: 40px 10px;
+  border-radius: 20px;
+  right: 400px;
+  transform: scale(1.2);
+}
+
+.form h2{
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
+}
+
+.form h2, p, .checkbox-content label, .input-field ::placeholder{
+  color: rgb(255, 255, 255);
+}
+
+.form a{
+  color: #3cdd7c;
+}
+
+.input-field {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.input-field input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0 50px;
+  border: none;
+  outline: none;
+  font-size: 16px;  
+  border: 2.5px solid #01d79c;
+  border-radius: 15px;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+input[type="text"], input[type="password"] {
+  background-color: transparent;
+}
+
+.input-field i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #01d79c;
+  font-size: 23px;
+  transition: all 0.2s ease;
+  padding-left: 15px;
+}
+
+.form .checkbox-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form .button button {
+  height: 50px;
+  width: 200px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 40px;
+  background-color: #01d79c;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button button:hover {
+  background-color: #fec276;
+}
+  
+.login-signup{
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}

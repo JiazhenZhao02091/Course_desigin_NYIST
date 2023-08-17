@@ -1,0 +1,9 @@
+body {
+    min-height: 100vh;
+    /*background: url("../../resources/static/img/background.png");*/
+    /*ba*/
+    background-image: url(../img/06.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

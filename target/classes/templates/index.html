@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" title="Coding design" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link th:href="@{/css/backGround.css}" rel="stylesheet"/>
+    <title>云平台管理系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        main.table {
+            width: 77vw;
+            height: 80vh;
+            background-color: #fff5;
+            box-shadow: 0 8px 16px #0005;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .header {
+            width: 100%;
+            height: 10%;
+            background-color: #fff4;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .input-group {
+            width: 35%;
+            height: 50%;
+            background-color: #fff5;
+            padding: 0 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .2s;
+        }
+
+        .header .input-group:hover {
+            width: 45%;
+            background-color: #fff8;
+            box-shadow: 0 5px 40px #0002;
+        }
+
+        .header .input-group img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .header .input-group input {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .shell {
+            width: 95%;
+            max-height: calc(90% - 25px);
+            background-color: #fffb;
+            margin: 8px auto;
+            border-radius: 10px;
+            overflow: auto;
+            /*overflow: overlay;*/
+        }
+
+        .shell::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td img {
+            width: 36px;
+            height: 36px;
+            margin-right: 10px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            padding: 20px;
+            text-align: left;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: #d5d1defe;
+            cursor: pointer;
+        }
+
+        /* 偶数行背景色 */
+        tbody tr:nth-child(even) {
+            background-color: #0000000b;
+        }
+
+        tbody tr:hover {
+            background-color: #fff6 !important;
+        }
+
+        .button {
+            padding: 5px 0;
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        tr:nth-child(4n) .button {
+            background-color: #86e49d;
+            color: #006b21;
+        }
+
+        tr:nth-child(4n-1) .button {
+            background-color: #ebc474;
+        }
+
+        tr:nth-child(4n+1) .button {
+            background-color: #d893a3;
+            color: #b30021;
+        }
+
+        tr:nth-child(4n+2) .button {
+            background-color: #6fcaea;
+        }
+        button{
+            background-color:#0dcaf0;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100px;
+            background-color: #eee;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .sidebar li a {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease-out;
+        }
+
+        .sidebar li a:hover {
+            color: #fff;
+            background-color: #333;
+        }
+
+
+        .btn {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #444;
+        }
+
+        .btn-primary {
+            background-color: #2c3e50;
+        }
+
+        .more-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            position: relative;
+        }
+
+        /* 添加伪元素 */
+        .more-btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #333;
+        }
+
+        /* 鼠标悬停时修改样式 */
+        .more-btn:hover {
+            background-color: #e0e0e0;
+            color: #000;
+        }
+
+        .more-btn:hover::after {
+            border-left-color: #000;
+        }
+
+        /* 设置一个卡片元素的基本样式 */
+        .card {
+            width: 800px; /* 设置宽度 */
+            height: 500px; /* 设置高度 */
+            border-radius: 50px; /* 设置圆角半径为50px */
+            background: #e0e0e0; /* 设置背景颜色为灰色 */
+            /* 设置两个颜色的阴影效果，形成凸起和凹陷的效果 */
+            box-shadow:
+                    20px 20px 60px #bebebe, /* 右下方的深灰色阴影 */
+                    -20px -20px 60px #ffffff; /* 左上方的白色阴影 */
+            margin: auto;
+        }
+
+        .container {
+            width: 1000px;
+            height: 500px;
+            position: relative;
+            perspective: 1000px;
+            margin: auto;
+        }
+        .just,
+        .back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            transition: transform 0.25s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .just {
+            transform: rotateY(0deg);
+            background-image: linear-gradient(
+                    117deg,
+                    #0072c6 39.2%, /* 深蓝色 */
+                    #ffffff 156.2%
+            );
+        }
+        .container:hover .just {
+            transform: rotateY(180deg);
+        }
+        .back {
+            transform: rotateY(-180deg);
+            background-image: linear-gradient(
+                    117deg,
+                    rgba(80, 120, 225, 1) 39.2%, /* 将绿色改为蓝色 */
+                    rgba(255, 255, 255, 1) 156.2%
+            );
+        }
+        .container:hover .back {
+            transform: rotateY(0deg);
+        }
+
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+    <ul>
+        <!--        <a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/main}">云平台管理</a>&ndash;&gt;-->
+        <li><a th:href="@{/main}" >虚拟机基础管理</a></li>
+        <li><a  th:href="@{/toAddVirtual}" >添加虚拟机</a>
+        </li>
+        <li><a  th:href="@{/img}">镜像管理</a></li>
+        <li><a  th:href="@{/toAddImg}">添加镜像</a></li>
+        <li><a  th:href="@{/storagePoolList}">存储池管理</a></li>
+        <li><a  th:href="@{/toCreateStoragepool}">添加存储池</a></li>
+        <li><a th:href="@{/index}">宿主机和Libvirt连接信息</a></li>
+        <div class="nav-box"></div>
+    </ul>
+</div>
+
+<main class="table">
+    <section class="header">
+        <h1 >宿主机信息和Libvirt连接信息</h1>
+        <!--        <a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/main}">云平台管理</a>&ndash;&gt;-->
+        <form class="d-flex" role="search" th:action="@{/loginOut}" method="get">
+            <button class="btn btn-outline-success" type="submit" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg></button>
+        </form>
+    </section>
+
+    <div class="container">
+        <div class="just">
+            <div class="card-text">
+                <h5>Libvirt连接信息：</h5>
+                <p class="mb-4" th:inline="text">主机名称：[[${connectInformation.hostName}]]</p>
+                <p class="mb-4" th:inline="text">连接URL：[[${connectInformation.url}]]</p>
+                <p class="mb-4" th:inline="text">libVir版本：[[${connectInformation.libVirVersion}]]</p>
+                <p class="mb-4" th:inline="text">
+                    hypervisor版本：[[${connectInformation.hypervisorVersion}]]</p>
+            </div>
+
+        </div>
+        <div class="back">
+            <div class="card-text">
+                <h5>宿主机信息：</h5>
+                <h5>版本信息</h5>
+                <p class="mb-3" th:inline="text">型号：[[${hostinfo.vendor}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数字版本：[[${hostinfo.vendorVersion}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文字版本：[[${hostinfo.vendorCodeName}]]&nbsp;&nbsp;&nbsp;内核版本：[[${hostinfo.version}]]</p>
+                <h5>内存信息</h5>
+                <p class="mb-3" th:inline="text">内存：[[${hostinfo.memory}]]k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用内存：[[${hostinfo.memoryUsed}]]k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可用内存：[[${hostinfo.memoryFree}]]k</p>
+                <p class="mb-3" th:inline="text">交换空间：[[${hostinfo.swap}]]k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用交换空间：[[${hostinfo.swapUsed}]]k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可用交换空间：[[${hostinfo.swapFree}]]k</p>
+                <h5>CPU信息</h5>
+                <p class="mb-4" th:inline="text">宿主机CPU数量：[[${hostinfo.cpuNum}]]个&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU型号：[[${hostinfo.cpuModel}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU频率：[[${hostinfo.cpuMhz}]]Mhz</p>
+                <h5>磁盘信息</h5>
+                <p class="mb-4" th:inline="text">设备名称：[[${hostinfo.devName}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设备目录：[[${hostinfo.dirName}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;磁盘总量：[[${hostinfo.fileTotal}]]KB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <br/>使用：[[${hostinfo.fileUsed}]]KB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用率：[[${hostinfo.fileUsePercent}]]%
+                </p>
+                <h5>网络信息</h5>
+                <p class="mb-4" th:inline="text">网卡描述：[[${hostinfo.netDescription}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网卡类型：[[${hostinfo.netType}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP地址：[[${hostinfo.netIP}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <br/>
+                    MAC地址：[[${hostinfo.netMAC}]]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mask掩码：[[${hostinfo.netMask}]]
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
+
+
+

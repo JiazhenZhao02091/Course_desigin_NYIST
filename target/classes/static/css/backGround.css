@@ -1,0 +1,8 @@
+body {
+    min-height: 100vh;
+    /*background: url("../img/06.png") center / cover;*/
+    background: url("../img/09.png") center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

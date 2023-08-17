@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/1a8c6dd550.js" crossorigin="anonymous"></script>
+</head>
+<body >
+<div class="form">
+<h2>Log in</h2>
+    <form th:action="@{/login}" method="post">
+        <div class="input-field">
+            <input type="text" placeholder="Enter your username" name="username" required=""/>
+            <i class="fa-regular fa-envelope"></i>
+        </div>
+        <div class="input-field">
+            <input type="password" placeholder="Enter your password" id="passwordInput"  name="password" required="" />
+            <i class="uil uil-lock icon"></i>
+        </div>
+        <div class="checkbox-text">
+            <div class="checkbox-content">
+                <input type="checkbox" />
+                <label for="logCheck">Remember me</label>
+            </div>
+        </div>
+        <div class="input-field button">
+            <button type="submit">Log in</button>
+        </div>
+        <div class="login-signup">
+            <p>Don't have an account yet? <a href="#">Sign up</a></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

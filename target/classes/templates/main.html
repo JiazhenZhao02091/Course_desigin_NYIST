@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" title="Coding design" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link th:href="@{/css/backGround.css}" rel="stylesheet"/>
+    <title>云平台管理系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        main.table {
+            width: 77vw;
+            height: 80vh;
+            background-color: #fff5;
+            box-shadow: 0 8px 16px #0005;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .header {
+            width: 100%;
+            height: 10%;
+            background-color: #fff4;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .input-group {
+            width: 35%;
+            height: 50%;
+            background-color: #fff5;
+            padding: 0 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .2s;
+        }
+
+        .header .input-group:hover {
+            width: 45%;
+            background-color: #fff8;
+            box-shadow: 0 5px 40px #0002;
+        }
+
+        .header .input-group img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .header .input-group input {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .shell {
+            width: 95%;
+            max-height: calc(90% - 25px);
+            background-color: #fffb;
+            margin: 8px auto;
+            border-radius: 10px;
+            overflow: auto;
+            /*overflow: overlay;*/
+        }
+
+        .shell::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td img {
+            width: 36px;
+            height: 36px;
+            margin-right: 10px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            padding: 20px;
+            text-align: left;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: #d5d1defe;
+            cursor: pointer;
+        }
+
+        /* 偶数行背景色 */
+        tbody tr:nth-child(even) {
+            background-color: #0000000b;
+        }
+
+        tbody tr:hover {
+            background-color: #fff6 !important;
+        }
+
+        .button {
+            padding: 5px 0;
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        tr:nth-child(4n) .button {
+            background-color: #86e49d;
+            color: #006b21;
+        }
+
+        tr:nth-child(4n-1) .button {
+            background-color: #ebc474;
+        }
+
+        tr:nth-child(4n+1) .button {
+            background-color: #d893a3;
+            color: #b30021;
+        }
+
+        tr:nth-child(4n+2) .button {
+            background-color: #6fcaea;
+        }
+        button{
+            background-color:#0dcaf0;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100px;
+            background-color: #eee;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .sidebar li a {
+            display: block;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease-out;
+        }
+
+        .sidebar li a:hover {
+            color: #fff;
+            background-color: #333;
+        }
+
+
+        .btn {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #444;
+        }
+
+        .btn-primary {
+            background-color: #2c3e50;
+        }
+
+        .more-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            position: relative;
+        }
+
+        /* 添加伪元素 */
+        .more-btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #333;
+        }
+
+        /* 鼠标悬停时修改样式 */
+        .more-btn:hover {
+            background-color: #e0e0e0;
+            color: #000;
+        }
+
+        .more-btn:hover::after {
+            border-left-color: #000;
+        }
+
+
+    </style>
+
+
+</head>
+
+
+<body>
+<!--<div class="nav" >-->
+<!--    <ul>-->
+<!--        &lt;!&ndash;        <a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/main}">云平台管理</a>&ndash;&gt;&ndash;&gt;-->
+<!--        <li><a th:href="@{/main}">BasicCmd</a></li>-->
+<!--        <li><a href="#">添加虚拟机</a></li>-->
+<!--        <li><a href="#">镜像管理</a></li>-->
+<!--        <li><a href="#">添加镜像</a></li>-->
+<!--        <li><a href="#">存储池管理</a></li>-->
+<!--        <li><a href="#">添加存储池</a></li>-->
+<!--        <li><a href="#">HostInfo</a></li>-->
+<!--        <div class="nav-box"></div>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<div class="sidebar">
+    <ul>
+        <!--        <a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/main}">云平台管理</a>&ndash;&gt;-->
+        <li><a th:href="@{/main}" >虚拟机基础管理</a></li>
+        <li><a  th:href="@{/toAddVirtual}" >添加虚拟机</a>
+        </li>
+        <li><a  th:href="@{/img}">镜像管理</a></li>
+        <li><a  th:href="@{/toAddImg}">添加镜像</a></li>
+        <li><a  th:href="@{/storagePoolList}">存储池管理</a></li>
+        <li><a  th:href="@{/toCreateStoragepool}">添加存储池</a></li>
+        <li><a th:href="@{/index}">宿主机和Libvirt连接信息</a></li>
+        <div class="nav-box"></div>
+    </ul>
+</div>
+
+<main class="table">
+    <section class="header">
+        <h1>云平台管理系统</h1>
+        <!--        <a class="nav-link py-3 px-0 px-lg-3 rounded" th:href="@{/main}">云平台管理</a>&ndash;&gt;-->
+        <ul class="nav navbar-nav navbar-right">
+            <li><a th:href="@{/openOrCloseNetWork(netState=${netState})}" th:inline="text">网络状态：[[${netState}]]</a></li>
+        </ul>
+        <form class="d-flex" role="search" th:action="@{/loginOut}" method="get">
+            <button class="btn btn-outline-success" type="submit" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg></button>
+        </form>
+    </section>
+    <section class="shell">
+        <table>
+            <thead>
+            <tr>
+                <th style="text-align: center;"> Id</th>
+                <th style="text-align: center;"> 名称 </th>
+                <th style="text-align: center;"> 状态</th>
+                <th style="text-align: center;"> 网络状态</th>
+                <th style="text-align: center;"> 网络类型</th>
+                <th style="text-align: center;"> 操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="virtual:${virtualList}">
+                <td th:text="${virtual.id}"></td>
+                <td th:text="${virtual.name}"></td>
+                <td th:text="${virtual.state}"></td>
+                <td th:text="${virtual.netState}"></td>
+                <td th:text="${virtual.netType}"></td>
+                <td>
+                    <div>
+                        <a th:href="@{/initiate(name=${virtual.name})}">启动</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/suspended(name=${virtual.name})}">挂起</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/resume(name=${virtual.name})}">还原</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/save(name=${virtual.name})}">保存</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/restore(name=${virtual.name})}">恢复</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/shutdown(name=${virtual.name})}">关闭</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/shutdownMust(name=${virtual.name})}">强制关闭</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/reboot(name=${virtual.name})}">重启</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/delete(name=${virtual.name})}">删除</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/getSnapshotList(name=${virtual.name})}">快照管理</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/openOrcloseNetWorkByName(name=${virtual.name},netState=${virtual.netState})}">网络开关</a>
+                        &nbsp;|&nbsp;
+                        <a th:href="@{/switchNetState(name=${virtual.name},netType=${virtual.netType})}">网络类型转换</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+</main>
+</body>
+
+</html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:v-model="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title>虚拟机管理</title>-->
+<!--    &lt;!&ndash;    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"&ndash;&gt;-->
+<!--&lt;!&ndash;          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"/>&ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!--<nav class="navbar navbar-default">-->
+<!--    <div class="container-fluid">-->
+
+
+
+<!--        &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+<!--        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+<!--            <ul class="nav navbar-nav">-->
+<!--                <li class="active"><a th:href="@{/main}">虚拟机基础管理<span class="sr-only">(current)</span></a></li>-->
+<!--                <li><a th:href="@{/toAddVirtual}">添加虚拟机</a></li>-->
+<!--                <li><a th:href="@{/img}">镜像管理</a></li>-->
+<!--                <li><a th:href="@{/toAddImg}">添加镜像</a></li>-->
+<!--                <li><a th:href="@{/storagePoolList}">存储池管理</a></li>-->
+<!--                <li><a th:href="@{/toCreateStoragepool}">添加存储池</a></li>-->
+<!--            </ul>-->
+<!--            <ul class="nav navbar-nav navbar-right">-->
+<!--                <li><a th:href="@{/openOrCloseNetWork(netState=${netState})}" th:inline="text">网络状态：[[${netState}]]</a></li>-->
+<!--                <li><a th:href="@{/loginOut}">注销登录</a></li>-->
+<!--            </ul>-->
+<!--        </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+<!--    </div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+<!--</nav>-->
+
+<!--<div class="container">-->
+<!--    <div class="row clearfix">-->
+<!--        <div class="col-md-12 column">-->
+<!--            <table class="table table-hover table-striped">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>ID</th>-->
+<!--                    <th>Name</th>-->
+<!--                    <th>Status</th>-->
+<!--                    <th>操作</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each="virtual:${virtualList}">-->
+<!--                    <td th:text="${virtual.id}"></td>-->
+<!--                    <td th:text="${virtual.name}"></td>-->
+<!--                    <td th:text="${virtual.state}"></td>-->
+<!--                    <td>-->
+<!--                        <div>-->
+<!--                            <a th:href="@{/initiate(name=${virtual.name})}">启动</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/suspended(name=${virtual.name})}">挂起</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/resume(name=${virtual.name})}">还原</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/save(name=${virtual.name})}">保存</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/restore(name=${virtual.name})}">恢复</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/shutdown(name=${virtual.name})}">关闭</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/shutdownMust(name=${virtual.name})}">强制关闭</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/reboot(name=${virtual.name})}">重启</a>-->
+<!--                            &nbsp;|&nbsp;-->
+<!--                            <a th:href="@{/delete(name=${virtual.name})}">删除</a>-->
+<!--                            &nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--                            <a th:href="@{/getSnapshotList(name=${virtual.name})}">快照管理</a>-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
