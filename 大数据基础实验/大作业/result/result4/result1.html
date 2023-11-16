@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts-wordcloud.min.js"></script>
+
+</head>
+<body >
+    <div id="00989b662b7043c4a674c20b302c5855" class="chart-container" style="width:900px; height:500px; "></div>
+    <script>
+        var chart_00989b662b7043c4a674c20b302c5855 = echarts.init(
+            document.getElementById('00989b662b7043c4a674c20b302c5855'), 'white', {renderer: 'canvas'});
+        var option_00989b662b7043c4a674c20b302c5855 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "wordCloud",
+            "shape": "diamond",
+            "rotationRange": [
+                0,
+                0
+            ],
+            "rotationStep": 45,
+            "girdSize": 20,
+            "sizeRange": [
+                20,
+                100
+            ],
+            "data": [
+                {
+                    "name": "New York",
+                    "value": 13231107,
+                    "textStyle": {
+                        "color": "rgb(57,87,52)"
+                    }
+                },
+                {
+                    "name": "New Jersey",
+                    "value": 4883171,
+                    "textStyle": {
+                        "color": "rgb(87,57,50)"
+                    }
+                },
+                {
+                    "name": "Michigan",
+                    "value": 1753801,
+                    "textStyle": {
+                        "color": "rgb(140,107,43)"
+                    }
+                },
+                {
+                    "name": "Massachusetts",
+                    "value": 2475673,
+                    "textStyle": {
+                        "color": "rgb(114,113,5)"
+                    }
+                },
+                {
+                    "name": "Pennsylvania",
+                    "value": 1970295,
+                    "textStyle": {
+                        "color": "rgb(36,112,53)"
+                    }
+                },
+                {
+                    "name": "Illinois",
+                    "value": 2316059,
+                    "textStyle": {
+                        "color": "rgb(42,133,95)"
+                    }
+                },
+                {
+                    "name": "Connecticut",
+                    "value": 1116652,
+                    "textStyle": {
+                        "color": "rgb(157,20,82)"
+                    }
+                },
+                {
+                    "name": "California",
+                    "value": 2211456,
+                    "textStyle": {
+                        "color": "rgb(56,150,13)"
+                    }
+                },
+                {
+                    "name": "Louisiana",
+                    "value": 1258141,
+                    "textStyle": {
+                        "color": "rgb(15,120,110)"
+                    }
+                },
+                {
+                    "name": "Florida",
+                    "value": 1480283,
+                    "textStyle": {
+                        "color": "rgb(99,140,7)"
+                    }
+                }
+            ],
+            "drawOutOfBound": false,
+            "textStyle": {
+                "emphasis": {}
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [],
+            "selected": {},
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderWidth": 1,
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "title": [
+        {
+            "show": true,
+            "text": "\u7f8e\u56fd\u5404\u5dde\u786e\u8bcaTop10",
+            "target": "blank",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false
+        }
+    ]
+};
+        chart_00989b662b7043c4a674c20b302c5855.setOption(option_00989b662b7043c4a674c20b302c5855);
+    </script>
+</body>
+</html>
