@@ -4,7 +4,7 @@ def main():
     tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # 链接服务器 localhost
-    tcp_socket.connect(("127.0.0.1", 80))
+    tcp_socket.connect(("47.93.127.150", 20000))
 
     # 发送数据/接收数据
     send_data = input("请输入要发送的数据:")
@@ -12,7 +12,7 @@ def main():
 
     # 打印服务器返回数据
     receive_data = tcp_socket.recv(1024)
-    print(receive_data)
+    print(receive_data.decode('utf8'))
 
     # 关闭套接字
     tcp_socket.close()
